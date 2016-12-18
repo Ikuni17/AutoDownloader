@@ -136,4 +136,4 @@ ENV/
 /Torrents/
 .idea/
 Torrents/
-aria2.conf
+/logs.txt
