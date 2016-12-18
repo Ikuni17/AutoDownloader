@@ -133,3 +133,7 @@ ENV/
 
 # Rope project settings
 .ropeproject
+/Torrents/
+.idea/
+Torrents/
+aria2.conf
