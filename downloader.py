@@ -6,8 +6,10 @@ import re
 import shutil
 import subprocess
 
+# Switched to checking for new episodes for each show everyday to avoid missing delayed releases
+# The logs file will avoid downloading duplicate episodes
 # {Weekday : [Show Names]}. Monday = 1 and Sunday = 7 from date.isoweekday()
-dEmily = {1: [],
+'''dEmily = {1: [],
           2: [],
           3: ["Sousei no Onmyouji"],
           4: [],
@@ -23,11 +25,15 @@ dBrad = {1: [],
          7: []}
 dBoth = {1: [],
          2: [],
-         3: ["Girlish Number"],
+         3: [],
          4: [],
          5: [],
          6: ["Bubuki Buranki"],
-         7: []}
+         7: []}'''
+
+lEmily = ["Sousei no Onmyouji", "Shuumatsu no Izetta", "Udon no Kuni no Kiniro Kemari", "Watashi ga Motete Dousunda"]
+lBrad = []
+lBoth = ["Bubuki Buranki"]
 
 # Commands to have aria download to the correct location, rather than moving files with the OS
 escapedQuote = "\""
@@ -74,18 +80,21 @@ def findUrl(showName):
     # Create a list of URLs with the matching tag
     # For NYAA, this is the download button in the search results table
     tdTag = parser.select("td.tlistdownload a")
-    # Position zero is the most recent episode
-    downloadUrl = tdTag[0]['href'].replace("//", "http://")
+    downloadList = []
+    for item in tdTag:
+        downloadUrl = item['href'].replace("//", "http://")
 
-    # Check if the episode has been downloaded before
-    if downloadUrl in open(sLogs).read():
-        return None
-    # If not, update the log and return the torrent URL
-    else:
-        logsFile = open(sLogs, "a")
-        logsFile.write(downloadUrl + "\n")
-        logsFile.close()
-        return downloadUrl
+        # Check if the episode has been downloaded before
+        if downloadUrl in open(sLogs).read():
+            continue
+        # If not, update the log and append the torrent URL
+        else:
+            logsFile = open(sLogs, "a")
+            logsFile.write(downloadUrl + "\n")
+            logsFile.close()
+            downloadList.append(downloadUrl)
+
+    return downloadList
 
 
 # Iterate through all download URLs and get the .torrent files
@@ -111,13 +120,13 @@ def downloadTorrents(urlList):
 
 # Find torrent urls, download them then start the torrents for each set: Emily, Brad, Both
 def runSet(showList, command):
-    urls = []
+    allUrls = []
     # Search for all shows
-    for shows in showList:
-        check = findUrl(shows)
-        if check is not None:
-            urls.append(check)
-    downloadTorrents(urls)
+    for show in showList:
+        showUrls = findUrl(show)
+        if showUrls is not None:
+            allUrls = allUrls + showUrls
+    downloadTorrents(allUrls)
     startTorrents(command)
 
 
@@ -133,15 +142,19 @@ def clearTorrents():
 
 def main():
     # Get the current weekday
-    now = datetime.datetime.now()
-    weekday = now.isoweekday()
+    # now = datetime.datetime.now()
+    # weekday = now.isoweekday()
 
     # Pass in the list of shows for each set, and the corresponding command
-    runSet(dEmily[weekday], emilyCommand)
+    '''runSet(dEmily[weekday], emilyCommand)
     clearTorrents()
     runSet(dBrad[weekday], bradCommand)
     clearTorrents()
     runSet(dBoth[weekday], bothCommand)
+    clearTorrents()'''
+    runSet(lEmily, emilyCommand)
+    runSet(lBrad, bradCommand)
+    runSet(lBoth, bothCommand)
     clearTorrents()
 
 
