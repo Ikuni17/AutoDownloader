@@ -4,6 +4,7 @@ import requests
 import datetime
 import re
 import shutil
+import subprocess
 
 # {Weekday : [Show Names]}. Monday = 1 and Sunday = 7 from date.isoweekday()
 dEmily = {1: [],
@@ -22,7 +23,7 @@ dBrad = {1: [],
          7: []}
 dBoth = {1: [],
          2: [],
-         3: [],
+         3: ["Girlish Number"],
          4: [],
          5: [],
          6: ["Bubuki Buranki"],
@@ -54,7 +55,7 @@ def startTorrents(command):
     # Append all torrents to the command file for simultaneous download
     for torrents in lTorrents:
         command = command + " " + escapedQuote + sTorrentDir + torrents + escapedQuote
-    os.system(command)
+    print((subprocess.Popen(command, stdout=subprocess.PIPE, shell=True, universal_newlines=True).communicate())[0])
 
 
 # Example aria command that starts three torrents
@@ -62,7 +63,7 @@ def startTorrents(command):
 
 # Returns the download URL for a torrent of the most recent episode of a show
 def findUrl(showName):
-    #logsFile = open(sLogs, "r")
+    # logsFile = open(sLogs, "r")
     showName = showName.replace(" ", "+")
     # Setup the complete URL
     url = searchUrl + showName + qualityUrl
@@ -97,14 +98,15 @@ def downloadTorrents(urlList):
         # Store the filename for use later
         lTorrents.append(filename[0])
         # Download the torrent file
-        os.system('curl -OJLs "' + url + '"')
+        command = 'curl -OJLs "' + url + '"'
+        subprocess.Popen(command, stdout=subprocess.PIPE, shell=True).communicate()
 
     # Avoid directory already exists errors
     if not os.path.isdir(torrentDir):
         os.makedirs(torrentDir)
 
     # Move the torrent files into a seperate directory
-    os.system("move *.torrent " + sTorrentDir)
+    subprocess.Popen(["move", "*.torrent", sTorrentDir], stdout=subprocess.PIPE, shell=True).communicate()
 
 
 # Find torrent urls, download them then start the torrents for each set: Emily, Brad, Both
@@ -128,6 +130,7 @@ def clearTorrents():
     # Remove the folder with the torrent files
     shutil.rmtree(torrentDir)
 
+
 def main():
     # Get the current weekday
     now = datetime.datetime.now()
@@ -140,6 +143,7 @@ def main():
     clearTorrents()
     runSet(dBoth[weekday], bothCommand)
     clearTorrents()
+
 
 # Start!
 main()
