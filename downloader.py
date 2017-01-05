@@ -33,8 +33,8 @@ dBoth = {1: [],
 
 lEmily = ["ACCA 13-ku Kansatsu-ka", "Chain Chronicle ~Hekuseitasu no Hikari~", "Demi-chan wa Kataritai", "Fuuka",
           "Gabriel Dropout", "Kobayashi-san Chi no Maid Dragon", "Kuzu no Honkai", "Little Witch Academia",
-          "Masamune-kun no Revenge", "Seiren", "Urara Meirochou"]
-lBrad = ["Ao no Exorcist: Kyoto Fujouou-Hen", "Onihei", "Schoolgirl Strikers: Animation Channel"]
+          "Masamune-kun no Revenge", "Seiren", "Sousei no Onmyouji", "Urara Meirochou"]
+lBrad = ["Ao no Exorcist: Kyoto Fujouou-hen", "Onihei", "Schoolgirl Strikers: Animation Channel"]
 lBoth = ["CHAOS;CHILD", "Hand Shakers", "Tales of Zestiria the X", "Youjo Senki"]
 
 # Commands to have aria download to the correct location, rather than moving files with the OS
