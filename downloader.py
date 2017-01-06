@@ -75,14 +75,29 @@ def findUrl(showName):
     showName = showName.replace(" ", "+")
     # Setup the complete URL
     url = searchUrl + showName + qualityUrl
+    #print(url)
     # Send an HTTP get request
     r = requests.get(url)
     # Parse the HTML
     parser = BeautifulSoup(r.content, "html.parser")
+    downloadList = []
+
+    # Check if we have results for a single episode because NYAA redirects to the page rather than search results
+    downloadButton = parser.select("div.viewdownloadbutton a")
+    if len(downloadButton) is not 0:
+        downloadUrl = downloadButton[0]['href'].replace("//", "http://")
+        # Check if the episode has been downloaded before
+        if downloadUrl not in open(sLogs).read():
+            logsFile = open(sLogs, "a")
+            logsFile.write(downloadUrl + "\n")
+            logsFile.close()
+            downloadList.append(downloadUrl)
+            return downloadList
+
     # Create a list of URLs with the matching tag
     # For NYAA, this is the download button in the search results table
     tdTag = parser.select("td.tlistdownload a")
-    downloadList = []
+
     for item in tdTag:
         downloadUrl = item['href'].replace("//", "http://")
 
