@@ -31,10 +31,10 @@ dBoth = {1: [],
          6: ["Bubuki Buranki"],
          7: []}'''
 
-lEmily = ["ACCA 13-ku Kansatsu-ka", "Chain Chronicle ~Hekuseitasu no Hikari~", "Demi-chan wa Kataritai", "Fuuka",
+lEmily = ["ACCA 13-ku Kansatsu-ka", "Chain Chronicle - Haecceitas no Hikari (TV)", "Demi-chan wa Kataritai", "Fuuka",
           "Gabriel Dropout", "Kobayashi-san Chi no Maid Dragon", "Kuzu no Honkai", "Little Witch Academia",
           "Masamune-kun no Revenge", "Seiren", "Sousei no Onmyouji", "Urara Meirochou"]
-lBrad = ["Ao no Exorcist: Kyoto Fujouou-hen", "Onihei", "Schoolgirl Strikers: Animation Channel"]
+lBrad = ["Ao no Exorcist: Kyoto Fujouou-hen", "Onihei", "Schoolgirl Strikers - Animation Channel"]
 lBoth = ["CHAOS;CHILD", "Hand Shakers", "Tales of Zestiria the X", "Youjo Senki"]
 
 # Commands to have aria download to the correct location, rather than moving files with the OS
@@ -71,10 +71,17 @@ def startTorrents(command):
 
 # Returns the download URL for a torrent of the most recent episode of a show
 def findUrl(showName):
+    global qualityUrl
     # logsFile = open(sLogs, "r")
     showName = showName.replace(" ", "+")
     # Setup the complete URL
-    url = searchUrl + showName + qualityUrl
+    # Edge case where the show is only releases in 720p
+    if showName == "Urara+Meirochou":
+        qualityUrl = "+horriblesubs+720"
+        url = searchUrl + showName + qualityUrl
+        qualityUrl = "+horriblesubs+1080"
+    else:
+        url = searchUrl + showName + qualityUrl
     #print(url)
     # Send an HTTP get request
     r = requests.get(url)
