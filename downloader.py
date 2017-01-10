@@ -72,7 +72,6 @@ def startTorrents(command):
 # Returns the download URL for a torrent of the most recent episode of a show
 def findUrl(showName):
     global qualityUrl
-    # logsFile = open(sLogs, "r")
     showName = showName.replace(" ", "+")
     # Setup the complete URL
     # Edge case where the show is only releases in 720p
@@ -82,7 +81,6 @@ def findUrl(showName):
         qualityUrl = "+horriblesubs+1080"
     else:
         url = searchUrl + showName + qualityUrl
-    #print(url)
     # Send an HTTP get request
     r = requests.get(url)
     # Parse the HTML
