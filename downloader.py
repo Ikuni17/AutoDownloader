@@ -84,7 +84,7 @@ def findUrl(showName):
         url = searchUrl + showName + qualityUrl
         qualityUrl = "+horriblesubs+1080"
     elif showName == "Little+Witch+Academia":
-        qualityUrl = "+eraser+720"
+        qualityUrl = "+eraser"
         url = searchUrl + showName + qualityUrl
         qualityUrl = "+horriblesubs+1080"
     else:
