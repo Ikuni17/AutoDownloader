@@ -31,11 +31,11 @@ dBoth = {1: [],
          6: ["Bubuki Buranki"],
          7: []}'''
 
-lEmily = ["ACCA 13-ku Kansatsu-ka", "Chain Chronicle - Haecceitas no Hikari (TV)", "Fuuka",
-          "Kobayashi-san Chi no Maid Dragon", "Kuzu no Honkai", "Little Witch Academia",
-          "Masamune-kun no Revenge", "Seiren", "Sousei no Onmyouji", "Urara Meirochou"]
+lEmily = ["ACCA 13-ku Kansatsu-ka", "Fuuka", "Kobayashi-san Chi no Maid Dragon", "Kuzu no Honkai",
+          "Little Witch Academia", "Masamune-kun no Revenge",
+          "Seiren", "Sousei no Onmyouji", "Urara Meirochou"]
 lBrad = ["Ao no Exorcist: Kyoto Fujouou-hen", "Onihei", "Schoolgirl Strikers - Animation Channel"]
-lBoth = ["ChaoS;Child", "Hand Shakers", "Tales of Zestiria the X", "Youjo Senki"]
+lBoth = ["Tales of Zestiria the X", "Youjo Senki"]
 
 # Commands to have aria download to the correct location, rather than moving files with the OS
 escapedQuote = "\""
@@ -84,7 +84,7 @@ def findUrl(showName):
         url = searchUrl + showName + qualityUrl
         qualityUrl = "+horriblesubs+1080"
     elif showName == "Little+Witch+Academia":
-        qualityUrl = "+eraser"
+        qualityUrl = "+asenshi"
         url = searchUrl + showName + qualityUrl
         qualityUrl = "+horriblesubs+1080"
     else:
