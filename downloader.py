@@ -31,11 +31,31 @@ dBoth = {1: [],
          6: ["Bubuki Buranki"],
          7: []}'''
 
-lEmily = ["ACCA 13-ku Kansatsu-ka", "Fuuka", "Kobayashi-san Chi no Maid Dragon", "Kuzu no Honkai",
-          "Little Witch Academia", "Masamune-kun no Revenge",
-          "Seiren", "Sousei no Onmyouji", "Urara Meirochou"]
-lBrad = ["Ao no Exorcist: Kyoto Fujouou-hen", "Onihei", "Schoolgirl Strikers - Animation Channel"]
-lBoth = ["Tales of Zestiria the X", "Youjo Senki"]
+lEmily = ["ACCA 13-ku Kansatsu-ka",
+          "Fuuka",
+          "Kobayashi-san Chi no Maid Dragon",
+          "Kuzu no Honkai",
+          "Little Witch Academia",
+          "Masamune-kun no Revenge",
+          "Sousei no Onmyouji",
+          "Urara Meirochou",
+          "Alice to Zouroku",
+          "Boku no Hero Academia",
+          "Boruto - Naruto Next Generations",
+          "Sagrada Reset",
+          "Sakura Quest",
+          "Uchouten Kazoku 2"]
+lBrad = ["Onihei",
+         "Schoolgirl Strikers - Animation Channel",
+         "Dungeon ni Deai o Motomeru no wa Machigatte Iru Darouka Gaiden: Sword Oratoria",
+         "Shūmatsu Nani Shitemasu ka?"]
+lBoth = ["Tales of Zestiria the X",
+         "Youjo Senki",
+         "Clockwork Planet",
+         "Re:CREATORS",
+         "Seikaisuru Kado",
+         "Shingeki no Bahamut: Virgin Soul",
+         "Shingeki no Kyojin"]
 
 # Commands to have aria download to the correct location, rather than moving files with the OS
 escapedQuote = "\""
