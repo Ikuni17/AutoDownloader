@@ -1,3 +1,1 @@
-This script will automatically search NYAA for the most recent episodes of anime that are defined in each user's list. After it gets the correct torrent file(s), the script will download the video file into the correct location. URLs are kept in a log to prevent duplicate downloads if an episode is delayed or the series has ended without updating the dictionary.
-
-The script is setup to run on startup and a predetermined time via Windows Task Scheduler.
+With NYAA shutting down in May 2017, this script no longer functions and I have switched to RSS feeds so the project will no longer be updated.

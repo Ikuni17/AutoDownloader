@@ -6,6 +6,7 @@ import re
 import shutil
 import subprocess
 
+# TODO Find a way to skip downloading batches
 # Switched to checking for new episodes for each show everyday to avoid missing delayed releases
 # The logs file will avoid downloading duplicate episodes
 # {Weekday : [Show Names]}. Monday = 1 and Sunday = 7 from date.isoweekday()
@@ -31,31 +32,23 @@ dBoth = {1: [],
          6: ["Bubuki Buranki"],
          7: []}'''
 
-lEmily = ["ACCA 13-ku Kansatsu-ka",
-          "Fuuka",
-          "Kobayashi-san Chi no Maid Dragon",
-          "Kuzu no Honkai",
-          "Little Witch Academia",
-          "Masamune-kun no Revenge",
-          "Sousei no Onmyouji",
-          "Urara Meirochou",
-          "Alice to Zouroku",
+lEmily = ["Alice to Zouroku",
           "Boku no Hero Academia",
           "Boruto - Naruto Next Generations",
+          "Little Witch Academia",
           "Sagrada Reset",
           "Sakura Quest",
-          "Uchouten Kazoku 2"]
-lBrad = ["Onihei",
-         "Schoolgirl Strikers - Animation Channel",
-         "Dungeon ni Deai o Motomeru no wa Machigatte Iru Darouka Gaiden: Sword Oratoria",
-         "Shūmatsu Nani Shitemasu ka?"]
-lBoth = ["Tales of Zestiria the X",
-         "Youjo Senki",
-         "Clockwork Planet",
-         "Re:CREATORS",
+          "Sousei no Onmyouji",
+          "Uchouten Kazoku S2"]
+lBrad = ["DanMachi Gaiden – Sword Oratoria",
+         "Onihei",
+         "Shuumatsu Nani Shitemasuka Isogashii Desuka Sukutte Moratte Ii Desuka"]
+lBoth = ["Clockwork Planet",
+         "Re-Creators",
          "Seikaisuru Kado",
-         "Shingeki no Bahamut: Virgin Soul",
-         "Shingeki no Kyojin"]
+         "Shingeki no Bahamut - Virgin Soul",
+         "Shingeki no Kyojin",
+         "Tales of Zestiria the X"]
 
 # Commands to have aria download to the correct location, rather than moving files with the OS
 escapedQuote = "\""
@@ -94,8 +87,8 @@ def findUrl(showName):
     global qualityUrl
     showName = showName.replace(" ", "+")
     # Setup the complete URL
-    # Edge case where the show is only releases in 720p
-    if showName == "Urara+Meirochou" or showName == "Kuzu+no+Honkai":
+    # Edge case where the show is only released in 720p
+    if showName == "Shingeki+no+Bahamut+-+Virgin+Soul" or showName == "Re-Creators":
         qualityUrl = "+horriblesubs+720"
         url = searchUrl + showName + qualityUrl
         qualityUrl = "+horriblesubs+1080"
